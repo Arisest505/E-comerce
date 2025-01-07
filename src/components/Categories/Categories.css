@@ -1,0 +1,121 @@
+/* Contenedor principal */
+.categorias-container {
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  padding: 20px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Título principal */
+.categorias-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #b39ddb; /* Morado claro */
+  margin-bottom: 20px;
+}
+
+/* Selector de categorías */
+.categorias-select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #b39ddb;
+  border-radius: 8px;
+  background-color: #1c1c1c; /* Fondo gris oscuro */
+  color: #fff;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.categorias-select:hover {
+  border-color: #7b1fa2; /* Morado más oscuro */
+}
+
+/* Contenedor de productos */
+.productos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Espaciado dinámico */
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Tarjeta de producto */
+.producto-card {
+  background: linear-gradient(145deg, #1c1c1c, #262626); /* Fondo dinámico */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenido de la tarjeta */
+.producto-card-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Imagen del producto */
+.producto-imagen {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Información del producto */
+.producto-info {
+  text-align: left;
+}
+
+/* Nombre del producto */
+.producto-nombre {
+  font-size: 1.5rem;
+  color: #b39ddb; /* Morado claro */
+  margin-bottom: 8px;
+}
+
+/* Descripción del producto */
+.producto-descripcion {
+  font-size: 1rem;
+  color: #ccc; /* Gris claro */
+  margin-bottom: 10px;
+}
+
+/* Precio del producto */
+.producto-precio {
+  font-size: 1.2rem;
+  color: #7b1fa2; /* Morado */
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Botón de compra */
+.producto-boton {
+  padding: 10px 20px;
+  background-color: #7b1fa2; /* Morado */
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.producto-boton:hover {
+  background-color: #6a1b9a; /* Morado más oscuro */
+}
+
+/* Mensaje de no productos */
+.no-productos {
+  font-size: 1.2rem;
+  color: #bbb; /* Gris claro */
+}

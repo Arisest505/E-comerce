@@ -1,0 +1,161 @@
+/* About.css */
+.about-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 64px;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    position: relative;
+  }
+  
+  .about-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(142, 36, 170, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .about-title-container {
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+  }
+  
+  .about-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #8E24AA, #5E1670);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .about-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(45deg, #8E24AA, #5E1670);
+    border-radius: 2px;
+  }
+  
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .about-content {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .about-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 32px 0 16px;
+    position: relative;
+    padding-left: 16px;
+  }
+  
+  .about-section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(to bottom, #8E24AA, #5E1670);
+    border-radius: 2px;
+  }
+  
+  .about-section-paragraph {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 24px;
+    position: relative;
+    padding-left: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .about-section-paragraph:hover {
+    transform: translateX(8px);
+    color: #333;
+  }
+  
+  /* Efectos de hover para las secciones */
+  .about-content:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+  }
+  
+  /* Animación de entrada */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Media queries para responsividad */
+  @media (max-width: 768px) {
+    .about-title {
+      font-size: 2rem;
+    }
+  
+    .about-content {
+      padding: 24px;
+    }
+  
+    .about-section-title {
+      font-size: 1.3rem;
+    }
+  
+    .about-section-paragraph {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  
+    .about-container {
+      padding: 0 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .about-title {
+      font-size: 1.75rem;
+    }
+  
+    .about-content {
+      padding: 20px;
+    }
+  
+    .about-section-paragraph:hover {
+      transform: none;
+    }
+  }

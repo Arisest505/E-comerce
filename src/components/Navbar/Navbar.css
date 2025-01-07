@@ -1,0 +1,25 @@
+/* Navbar.css */
+
+/* Estilo para los botones de los enlaces */
+.navbar-link {
+    text-decoration: none;
+    color: rgb(255, 255, 255); /* Color por defecto */
+    padding: 10px 15px;
+    transition: all 0.2s ease; /* Para las transiciones */
+  }
+  
+  .navbar-link:hover {
+    color: #ab62ff; /* Color al hacer hover */
+    background-color: rgba(172, 109, 255, 0.493); /* Fondo suave cuando el cursor está sobre el enlace */
+    border-radius: 5px; /* Bordes redondeados en hover */
+  }
+  
+  /* Para cuando el link está activo */
+  .navbar-link-active {
+    color: #ffffff; /* Color de los links activos */
+    font-weight: bold;
+  }
+  
+  .MuiPaper-root {
+    background-color: #000000;
+  }
