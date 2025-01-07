@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Container, Grid, Card, CardMedia, CardContent, CardActions, Button } from '@mui/material';
-import './Home.css'; // Importa el archivo CSS
+import { useCart } from '../Cart/CartContext'; // Importa el hook del contexto
+import './Home.css';
 
 const Home = () => {
-  const [productos, setProductos] = useState([]); // Estado para almacenar los productos
+  const [productos, setProductos] = useState([]);
+  const { addToCart } = useCart(); // Desestructura la función addToCart desde el contexto
 
   useEffect(() => {
-    // Solicitar los productos al backend cuando el componente se monta
     fetch('http://localhost:8080/api/productos')
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('Error en la respuesta del servidor');
-        }
+        if (!response.ok) throw new Error('Error en la respuesta del servidor');
         return response.json();
       })
       .then((data) => setProductos(data))
-      .catch((error) => {
-        console.error('Error fetching productos:', error);
-      });
-  }, []); // El array vacío asegura que se ejecute solo una vez al cargar el componente
+      .catch((error) => console.error('Error fetching productos:', error));
+  }, []);
 
   return (
     <Container className="home-container" maxWidth="xl">
@@ -41,18 +38,17 @@ const Home = () => {
 
       {/* Lista de productos */}
       <Grid container spacing={4}>
-        {productos.map((product, index) => (
+        {productos.map((product) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
             <Card
               sx={{
-                backgroundColor: '#000',  // Fondo negro
-                color: '#fff',            // Texto blanco
+                backgroundColor: '#000',
+                color: '#fff',
                 borderRadius: '8px',
                 boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-5px)',
-                  boxShadow: '0 8px 16px rgba(0, 0, 0, 0.4)', // Sombra más fuerte en hover
+                  boxShadow: '0 8px 16px rgba(0, 0, 0, 0.4)',
                 },
               }}
             >
@@ -78,16 +74,17 @@ const Home = () => {
               <CardActions>
                 <Button
                   sx={{
-                    background: 'linear-gradient(45deg, #7b1fa2, #b39ddb)', // Degradado morado
+                    background: 'linear-gradient(45deg, #7b1fa2, #b39ddb)',
                     color: '#fff',
                     fontWeight: '600',
                     borderRadius: '6px',
                     padding: '8px',
                     '&:hover': {
-                      background: 'linear-gradient(45deg, #6a1b9a, #9e91c9)', // Morado más oscuro en hover
+                      background: 'linear-gradient(45deg, #6a1b9a, #9e91c9)',
                     },
                   }}
                   fullWidth
+                  onClick={() => addToCart(product)} // Llama a la función addToCart
                 >
                   Comprar
                 </Button>

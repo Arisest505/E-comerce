@@ -1,42 +1,36 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/navbar';
 import Home from './components/Home/Home';
-import Categorias from './components/Categories/Categorias'; 
+import Categorias from './components/Categories/Categorias';
 import Cart from './components/Cart/Cart';
 import About from './components/About/About';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CategoriaProductos from './views/CategoriaProductos';
+import { CartProvider } from './components/Cart/CartContext'; // Importa el proveedor del contexto
 import './App.css';
-import CategoriaProductos from './views/CategoriaProductos'; // Asegúrate de importar el componente correcto
 
 function App() {
   return (
-    <div className="app-container">
-      {/* Contenedor principal de la aplicación */}
-      <Router>
-        {/* Barra de navegación */}
-        <Navbar />
-
-        {/* Contenido de la aplicación */}
-        <div className="app-content">
-          <Routes>
-            {/* Ruta principal que renderiza el componente Home */}
-            <Route path="/" element={<Home />} />
-            
-            {/* Ruta para categorías */}
-            <Route path="/categorias" element={<Categorias />} />
-            
-            {/* Ruta dinámica para las categorías */}
-            <Route path="/categorias/:categoria" element={<CategoriaProductos />} />
-            
-            {/* Ruta para la página "Sobre nosotros" */}
-            <Route path="/about" element={<About />} />
-            
-            {/* Ruta para el carrito */}
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </div>
-      </Router>
-    </div>
+    <CartProvider>
+      {/* Proveedor del contexto de carrito para envolver toda la aplicación */}
+      <div className="app-container">
+        <Router>
+          {/* Barra de navegación */}
+          <Navbar />
+          <div className="app-content">
+            {/* Rutas de la aplicación */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/categorias" element={<Categorias />} />
+              <Route path="/categorias/:categoria" element={<CategoriaProductos />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="*" element={<h2>Página no encontrada</h2>} />
+            </Routes>
+          </div>
+        </Router>
+      </div>
+    </CartProvider>
   );
 }
 

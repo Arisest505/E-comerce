@@ -2,21 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Grid, Card, CardMedia, CardContent, CardActions, Button, Typography } from '@mui/material';
 import axios from 'axios';
+import { useCart } from '../components/Cart/CartContext'; 
 
 const CategoriaProductos = () => {
   const { categoria } = useParams(); // Captura el parámetro 'categoria' de la URL
   const [productos, setProductos] = useState([]);
+  const { addToCart } = useCart(); // Usamos la función para añadir productos al carrito
 
   useEffect(() => {
     // Solicitar los productos de la categoría seleccionada
-    axios.get(`http://localhost:8080/api/productos/categoria?categoria=${categoria}`)
-      .then(response => {
-        setProductos(response.data);
+    axios
+      .get(`http://localhost:8080/api/productos/categoria?categoria=${categoria}`)
+      .then((response) => {
+        setProductos(response.data); // Guardamos los productos en el estado
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching productos:', error);
       });
-  }, [categoria]);  // El hook se ejecuta cada vez que cambie el valor de 'categoria'
+  }, [categoria]);
 
   return (
     <Container>
@@ -35,7 +38,7 @@ const CategoriaProductos = () => {
                   width: '100%',
                   height: '300px',
                 }}
-                image={producto.imagen || 'default-image.jpg'}
+                image={producto.imagen || 'default-image.jpg'} // Imagen predeterminada si no tiene imagen
                 alt={producto.nombre}
               />
               <CardContent>
@@ -55,6 +58,7 @@ const CategoriaProductos = () => {
                     },
                   }}
                   fullWidth
+                  onClick={() => addToCart(producto)} // Pasamos el producto correcto
                 >
                   Comprar
                 </Button>

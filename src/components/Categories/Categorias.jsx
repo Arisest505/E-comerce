@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useCart } from '../Cart/CartContext'; // Importar el contexto del carrito
 import './Categories.css'; // Archivo CSS para el diseño
 
 function Categorias() {
   const [categorias, setCategorias] = useState([]); // Lista de categorías
   const [productos, setProductos] = useState([]); // Lista de productos
   const [selectedCategory, setSelectedCategory] = useState(''); // Categoría seleccionada
+
+  const { addToCart } = useCart(); // Usamos la función para añadir productos al carrito
 
   // Obtener categorías al cargar el componente
   useEffect(() => {
@@ -70,7 +73,12 @@ function Categorias() {
                   <h3 className="producto-nombre">{producto.nombre}</h3>
                   <p className="producto-descripcion">{producto.descripcion}</p>
                   <p className="producto-precio">Precio: ${producto.precio_venta}</p>
-                  <button className="producto-boton">Comprar</button>
+                  <button
+                    className="producto-boton"
+                    onClick={() => addToCart(producto)} // Añadir producto al carrito
+                  >
+                    Comprar
+                  </button>
                 </div>
               </div>
             </div>

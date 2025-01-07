@@ -2,10 +2,12 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Badge, Menu, MenuItem, Box } from '@mui/material';
 import { ShoppingCart as ShoppingCartIcon, Menu as MenuIcon } from '@mui/icons-material';
 import { Link, NavLink } from 'react-router-dom';
+import { useCart } from '../Cart/CartContext'; // Importa el hook del contexto
 import './Navbar.css'; // Importa el archivo CSS
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { cart } = useCart(); // Accede al estado del carrito
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -16,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#000000 ', zIndex: 1201 }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#000000', zIndex: 1201 }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         {/* Icono del menú móvil */}
         <IconButton
@@ -32,7 +34,7 @@ const Navbar = () => {
         {/* Logo */}
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <NavLink to="/" className="navbar-link">
-            E-Shop
+          Noir-Solace
           </NavLink>
         </Typography>
 
@@ -48,18 +50,18 @@ const Navbar = () => {
             to="/categorias"
             className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}
           >
-            <Button color="inherit">Categories</Button>
+            <Button color="inherit">Categorias</Button>
           </NavLink>
           <NavLink
             to="/about"
             className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}
           >
-            <Button color="inherit">About</Button>
+            <Button color="inherit">Nosotros</Button>
           </NavLink>
 
           {/* Carrito */}
           <IconButton color="inherit" component={Link} to="/cart">
-            <Badge badgeContent={0} color="error">
+            <Badge badgeContent={cart.length} color="error">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
@@ -74,23 +76,35 @@ const Navbar = () => {
         sx={{ display: { xs: 'block', sm: 'none' } }}
       >
         <MenuItem onClick={handleMenuClose}>
-          <NavLink to="/" className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}
+          >
             Home
           </NavLink>
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>
-          <NavLink to="/categorias" className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}>
-            Categories
+          <NavLink
+            to="/categorias"
+            className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}
+          >
+            Categorias
           </NavLink>
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>
-          <NavLink to="/about" className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}>
-            About
+          <NavLink
+            to="/about"
+            className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}
+          >
+            Nosotros
           </NavLink>
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>
-          <NavLink to="/cart" className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}>
-            Cart (0)
+          <NavLink
+            to="/cart"
+            className={({ isActive }) => (isActive ? 'navbar-link-active' : 'navbar-link')}
+          >
+            Carrito ({cart.length})
           </NavLink>
         </MenuItem>
       </Menu>

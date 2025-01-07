@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { AnimatePresence } from 'framer-motion';
+import { CartProvider } from './context/CartContext'; // Importa el CartProvider
 
 // Configuración de tema oscuro/claro con detección automática
 const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -116,12 +117,14 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AnimatePresence mode="wait">
-            <App />
-          </AnimatePresence>
-        </ThemeProvider>
+        <CartProvider> {/* Envolvemos la app con CartProvider */}
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AnimatePresence mode="wait">
+              <App />
+            </AnimatePresence>
+          </ThemeProvider>
+        </CartProvider>
       </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>
