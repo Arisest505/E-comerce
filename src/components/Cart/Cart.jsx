@@ -1,29 +1,20 @@
 import React from 'react';
 import { useCart } from './CartContext'; // Importa el hook del contexto
-import {
-  Typography,
-  Container,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Button,
-  Grid,
-  Box,
-} from '@mui/material';
+import { Typography, Container, Grid, Box, Button } from '@mui/material';
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
+import './Cart.css'; // Importa los estilos de Cart.css
 
 const Cart = () => {
   const { cart, updateCartQuantity, removeFromCart, clearCart } = useCart();
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom className="cart-title">
         Tu Carrito
       </Typography>
 
       {cart.length === 0 && (
-        <Typography variant="body1" align="center" sx={{ marginTop: 4 }}>
+        <Typography variant="body1" align="center" className="empty-cart-text">
           El carrito está vacío.
         </Typography>
       )}
@@ -31,33 +22,31 @@ const Cart = () => {
       <Grid container spacing={4}>
         {cart.map((producto) => (
           <Grid item xs={12} sm={6} md={4} key={producto.id}>
-            <Card sx={{ display: 'flex', flexDirection: 'column' }}>
-              <CardMedia
-                component="img"
-                image={producto.imagen || 'default-image.jpg'} // Imagen predeterminada si no tiene imagen
+            <div className="cart-item">
+              <img
+                className="cart-item-image"
+                src={producto.imagen || 'default-image.jpg'}
                 alt={producto.nombre}
-                sx={{
-                  height: 200,
-                  objectFit: 'contain',
-                }}
               />
-              <CardContent>
-                <Typography variant="h6">{producto.nombre}</Typography>
-                <Typography variant="body2" sx={{ marginBottom: 2 }}>
+              <div className="cart-item-content">
+                <Typography variant="h6" className="cart-item-name">
+                  {producto.nombre}
+                </Typography>
+                <Typography variant="body2" className="cart-item-price">
                   Precio: ${producto.precio_venta}
                 </Typography>
 
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box className="cart-item-quantity">
                   <Button
                     onClick={() => updateCartQuantity(producto.id, false)}
                     variant="outlined"
                     size="small"
                     disabled={producto.quantity <= 1}
-                    sx={{ marginRight: 1 }}
+                    className="cart-item-quantity-btn"
                   >
                     <FaMinus />
                   </Button>
-                  <Typography variant="body2" sx={{ marginRight: 1 }}>
+                  <Typography variant="body2" className="cart-item-quantity-text">
                     {producto.quantity}
                   </Typography>
                   <Button
@@ -65,28 +54,30 @@ const Cart = () => {
                     variant="outlined"
                     size="small"
                     disabled={producto.quantity >= 10}
+                    className="cart-item-quantity-btn"
                   >
                     <FaPlus />
                   </Button>
                 </Box>
-              </CardContent>
-              <CardActions sx={{ justifyContent: 'space-between' }}>
+              </div>
+              <div className="cart-item-actions">
                 <Button
                   onClick={() => removeFromCart(producto.id)}
                   variant="contained"
                   color="secondary"
+                  className="cart-item-remove-btn"
                 >
                   Eliminar
                 </Button>
-              </CardActions>
-            </Card>
+              </div>
+            </div>
           </Grid>
         ))}
       </Grid>
 
       {cart.length > 0 && (
-        <Box sx={{ marginTop: 4 }}>
-          <Typography variant="h6" align="right">
+        <Box className="cart-total">
+          <Typography variant="h6" className="cart-total-text">
             Total: ${cart.reduce((total, item) => total + item.precio_venta * item.quantity, 0).toFixed(2)}
           </Typography>
           <Button
@@ -94,7 +85,7 @@ const Cart = () => {
             variant="contained"
             color="primary"
             fullWidth
-            sx={{ marginTop: 2 }}
+            className="cart-clear-btn"
           >
             Vaciar Carrito
           </Button>
